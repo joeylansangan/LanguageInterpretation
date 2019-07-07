@@ -14,7 +14,7 @@ var [node, file, ...args] = process.argv;
 
 // slice the array to skip process.argv[0] & process.argv[1]
 // join user input with spaces
-console.log(args.slice(1).join(" "))
+console.log("User Search: " + args.slice(1).join(" "))
 
 // variable that retrieves your spotify information via keys.js
 var spotify = new Spotify(keys.spotify);
@@ -73,15 +73,14 @@ function searchMovie(movieName){
         console.log("Year: " + movie.data.Year);
         console.log("IMDB Rating: " + movie.data.imdbRating);
         console.log("Rotten Tomatoes Rating: " + movie.data.Ratings[1].Value);
-        console.log("IMDB Rating: " + movie.data.Country);
-        console.log("IMDB Rating: " + movie.data.Language);
-        console.log("IMDB Rating: " + movie.data.Plot);
-        console.log("IMDB Rating: " + movie.data.Actors);
+        console.log("Country: " + movie.data.Country);
+        console.log("Language: " + movie.data.Language);
+        console.log("Plot: " + movie.data.Plot);
+        console.log("Actors: " + movie.data.Actors);
         console.log("\n----------------\n")
     })
 }
 
-searchMovie("shrek");
 
 // * Title of the movie.
 // * Year the movie came out.
