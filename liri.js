@@ -9,16 +9,17 @@ var axios = require("axios");
 var Spotify = require('node-spotify-api');
 
 
-// make process.argv into an array
+// make process.argv into an accesible array
 var [node, file, ...args] = process.argv;
 
 // slice the array to skip process.argv[0] & process.argv[1]
 // join user input with spaces
 console.log(args.slice(1).join(" "))
+
 // variable that retrieves your spotify information via keys.js
 var spotify = new Spotify(keys.spotify);
 
-
+// if/else statement to run searchSpotify()
 if(args[0] === "spotify-this-song"){
     if (args[1] === undefined){
         searchSpotify("creep");
@@ -28,6 +29,19 @@ if(args[0] === "spotify-this-song"){
         searchSpotify(songTitle);
     }
 }
+
+// if/else statement to run searchMovie()
+if(args[0] === "movie-this"){
+    if (args[1] === undefined){
+        searchSpotify("shrek");
+    }
+    else{
+        var movieTitle = args.slice(1).join(" "); 
+        searchMovie(movieTitle);
+    }
+}
+
+// spotify function
 function searchSpotify(songName){
 
     spotify.search({ type: 'track', query: songName, limit: 5 }, function(err, data) {
@@ -45,6 +59,12 @@ function searchSpotify(songName){
       })
       });
 
+}
+
+// movie function
+
+function searchMovie(movieName){
+    
 }
 
 
