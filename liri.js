@@ -68,10 +68,15 @@ function searchMovie(movieName){
 
     axios.get("http://www.omdbapi.com/?t=" + movieName + "&apikey=" + apiKey)
     .then(function(movie){
+        console.log("\n----------------")
         console.log("\nTitle: " + movie.data.Title);
         console.log("Year: " + movie.data.Year);
-        console.log("Spotify preview link: " + element.preview_url);
-        console.log("Album: " + element.album.name);
+        console.log("IMDB Rating: " + movie.data.imdbRating);
+        console.log("Rotten Tomatoes Rating: " + movie.data.Ratings[1].Value);
+        console.log("IMDB Rating: " + movie.data.Country);
+        console.log("IMDB Rating: " + movie.data.Language);
+        console.log("IMDB Rating: " + movie.data.Plot);
+        console.log("IMDB Rating: " + movie.data.Actors);
         console.log("\n----------------\n")
     })
 }
