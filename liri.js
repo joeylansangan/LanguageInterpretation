@@ -7,7 +7,8 @@ var keys = require("./keys");
 var fs = require("fs");
 var axios = require("axios");
 var Spotify = require('node-spotify-api');
-
+var moment = require('moment');
+// moment().format();
 
 // make process.argv into an accesible array
 var [node, file, ...args] = process.argv;
@@ -84,15 +85,33 @@ function searchMovie(movieName){
 function searchBands(bandName){
     axios.get("https://rest.bandsintown.com/artists/" + bandName + "/events?app_id=codingbootcamp")
     .then(function(bands){
+    
         console.log("\n----------------")
         console.log(bands.data.forEach(function(element){
+            // given date format is 2019-11-02T19:00:08
+            var dateTime = element.datetime;
+            // so we split this by T
+            var split = dateTime.split("T");
+            // then we split the date by "-" which is located at 0 index
+            // then join the date without separation
+            var date = split[0].split("-").join("")
+            console.log(date);
+
+            // var dateFormat = "YYYY/MM/DD";
+            // var convertedDate = moment(tourDate, dateFormat);
+            // console.log("convert" + convertedDate);
+
             console.log("\n----------------\n")
             console.log("Name of the Venue: " + element.venue.name)
-            console.log("Venue Location: " + element.venue.city + ", " + element.venue.country);
+            console.log("Venue Location: " + element.venue.city + ", " + element.venue.country);       
+            // console.log("Date: " + tourDate);
         }));
     })
 }
 
+    
+    // var dateFormat = "MM/DD/YYYY";
+    // var convertedDate = moment(tourDate, dateFormat);
 
 searchBands("pink");
 
