@@ -42,6 +42,31 @@ if(args[0] === "movie-this"){
     }
 }
 
+// if/else statement to run searchEvent()
+if(args[0] === "concert-this"){
+    if (args[1] === undefined){
+        searchEvent("pink");
+    }
+    else{
+        var artistName = args.slice(1).join(" "); 
+        searchEvent(artistName);
+    }
+}
+
+// do what it says
+if (args[0] === "do-what-it-says"){
+    fs.readFile("random.txt", "utf8", function(error, data){
+        if (error){
+            return console.log(error);
+        }
+
+        dataArray = data.split(",");
+        // console.log(dataArray);
+
+        searchSpotify(dataArray[1]);
+    })
+}
+
 // spotify function
 function searchSpotify(songName){
 
@@ -63,7 +88,6 @@ function searchSpotify(songName){
 }
 
 // movie function
-
 function searchMovie(movieName){
     apiKey = "f7e57d25";
 
@@ -82,7 +106,8 @@ function searchMovie(movieName){
     })
 }
 
-function searchBands(bandName){
+// bands in town function
+function searchEvent(bandName){
     axios.get("https://rest.bandsintown.com/artists/" + bandName + "/events?app_id=codingbootcamp")
     .then(function(bands){
     
@@ -97,35 +122,19 @@ function searchBands(bandName){
             var date = split[0].split("-").join("")
             console.log(date);
 
-            // var dateFormat = "YYYY/MM/DD";
-            // var convertedDate = moment(tourDate, dateFormat);
-            // console.log("convert" + convertedDate);
+            // format the date is currently in
+            var format = "YYYY/MM/DD";
+            // convert this date into moment
+            var convertedDate = moment(date, format);
+            // format converted moment date 
+            var dateFormat = convertedDate.format("MM/DD/YYYY")
 
             console.log("\n----------------\n")
             console.log("Name of the Venue: " + element.venue.name)
             console.log("Venue Location: " + element.venue.city + ", " + element.venue.country);       
-            // console.log("Date: " + tourDate);
+            console.log("Event Date: " + dateFormat)
         }));
     })
 }
 
     
-    // var dateFormat = "MM/DD/YYYY";
-    // var convertedDate = moment(tourDate, dateFormat);
-
-searchBands("pink");
-
-// spotify.search({ type: 'track', query: songName, limit: 5 }, function(err, data) {
-//     if (err) {
-//       return console.log('Error occurred: ' + err);
-//     }
-   
-//   data.tracks.items.forEach(function(element){
-//       console.log("\nArtist: " + element.artists[0].name);
-//       console.log("Song: " + songName);
-//       console.log("Spotify preview link: " + element.preview_url);
-//       console.log("Album: " + element.album.name);
-//       console.log("\n----------------\n")
-      
-//   })
-//   });
