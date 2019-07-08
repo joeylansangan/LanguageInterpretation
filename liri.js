@@ -81,12 +81,32 @@ function searchMovie(movieName){
     })
 }
 
+function searchBands(bandName){
+    axios.get("https://rest.bandsintown.com/artists/" + bandName + "/events?app_id=codingbootcamp")
+    .then(function(bands){
+        console.log("\n----------------")
+        console.log(bands.data.forEach(function(element){
+            console.log("\n----------------\n")
+            console.log("Name of the Venue: " + element.venue.name)
+            console.log("Venue Location: " + element.venue.city + ", " + element.venue.country);
+        }));
+    })
+}
 
-// * Title of the movie.
-// * Year the movie came out.
-// * IMDB Rating of the movie.
-// * Rotten Tomatoes Rating of the movie.
-// * Country where the movie was produced.
-// * Language of the movie.
-// * Plot of the movie.
-// * Actors in the movie.
+
+searchBands("pink");
+
+// spotify.search({ type: 'track', query: songName, limit: 5 }, function(err, data) {
+//     if (err) {
+//       return console.log('Error occurred: ' + err);
+//     }
+   
+//   data.tracks.items.forEach(function(element){
+//       console.log("\nArtist: " + element.artists[0].name);
+//       console.log("Song: " + songName);
+//       console.log("Spotify preview link: " + element.preview_url);
+//       console.log("Album: " + element.album.name);
+//       console.log("\n----------------\n")
+      
+//   })
+//   });
