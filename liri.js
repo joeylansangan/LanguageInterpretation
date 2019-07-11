@@ -34,7 +34,7 @@ if(args[0] === "spotify-this-song"){
 // if/else statement to run searchMovie()
 if(args[0] === "movie-this"){
     if (args[1] === undefined){
-        searchSpotify("shrek");
+        searchMovie("shrek");
     }
     else{
         var movieTitle = args.slice(1).join(" "); 
